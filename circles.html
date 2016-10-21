@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script>
+(function(e){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=e()}else if(typeof define==="function"&&define.amd){define([],e)}else{var r;if(typeof window!=="undefined"){r=window}else if(typeof global!=="undefined"){r=global}else if(typeof self!=="undefined"){r=self}else{r=this}r.getCanvasPixelColor=e()}})(function(){var e,r,t;return function n(e,r,t){function o(i,u){if(!r[i]){if(!e[i]){var a=typeof require=="function"&&require;if(!u&&a)return a(i,!0);if(f)return f(i,!0);var d=new Error("Cannot find module '"+i+"'");throw d.code="MODULE_NOT_FOUND",d}var l=r[i]={exports:{}};e[i][0].call(l.exports,function(r){var t=e[i][1][r];return o(t?t:r)},l,l.exports,n,e,r,t)}return r[i].exports}var f=typeof require=="function"&&require;for(var i=0;i<t.length;i++)o(t[i]);return o}({1:[function(e,r,t){"use strict";Object.defineProperty(t,"__esModule",{value:true});t["default"]=function(e,r,t){if(!e.getImageData){e=e.getContext("2d")}var n=e.getImageData(r,t,1,1).data;n.r=n[0];n.b=n[1];n.g=n[2];n.a=n[3];n.rgb="rgb("+n.r+","+n.g+","+n.b+")";n.rgba="rgb("+n.r+","+n.g+","+n.b+","+n.a+")";return n};r.exports=t["default"]},{}]},{},[1])(1)});
+</script>
+
+<style>
+    body{ background-color: black; }
+    canvas{border:1px solid red;}
+</style>
+
+<script>
+$(function(){
+
+    var canvas=document.getElementById("canvas");
+    var ctx=canvas.getContext("2d");
+
+    ctx.fillStyle="#ffffff";
+    ctx.strokeStyle="#ffffff";
+    ctx.lineWidth=1;
+    var circle1={x:100,y:100,r:50};
+    var circle2={x:140,y:100,r:50};
+    var circle3 = {x: 200, y: 150, r: 10};
+
+
+    // draw circle1
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(circle1.x,circle1.y,circle1.r, 0, 2*Math.PI, false);
+    ctx.stroke();
+    ctx.fill();
+
+
+    // draw the stroke for circle2 again
+    ctx.beginPath();
+    ctx.arc(circle2.x,circle2.y,circle2.r, 0, 2*Math.PI, false);
+    ctx.stroke();
+    ctx.fill();
+    ctx.save();
+
+    ctx.beginPath();
+    ctx.arc(circle3.x,circle3.y,circle3.r, 0, 2*Math.PI, false);
+    ctx.stroke();
+    ctx.fill();
+    ctx.save();
+    //
+    // var color = getCanvasPixelColor(document.querySelector("canvas"), 100, 100);
+    // console.log(color.rgb);
+
+    area = 0;
+    for (var i = 0; i < 300; i++) {
+      for (var j = 0; j < 300; j++) {
+        var color = getCanvasPixelColor(ctx, i, j);
+        //console.log(color);
+        if (color[0] === 255 && color[1] === 255 && color[0] === 255) {
+
+          area += 1;
+        }
+      }
+    }
+
+    console.log(area);
+
+}); // end $(function(){});
+</script>
+
+</head>
+
+<body>
+    <canvas id="canvas" width=300 height=300></canvas>
+</body>
+</html>
